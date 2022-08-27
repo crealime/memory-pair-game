@@ -1,0 +1,148 @@
+@font-face {
+  font-family: 'Montez';
+  src: local('Montez'), local('Montez-Regular'), url('../fonts/Montez.woff2') format('woff2'), url('../fonts/Montez.woff') format('woff'), url('../fonts/Montez.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+:root {
+  --color-background: #1A2F3D;
+  --color-background-card: #283C4D;
+  --color-primary: #72B4BA;
+  --color-warning: #AC6E8B;
+  --color-success: #8FB16A;
+}
+
+html {
+  font-size: 16px;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: "Montez", sans-serif;
+  background: var(--color-background);
+  color: var(--color-primary);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: #343434;
+  text-decoration: none
+}
+
+a:hover, a:focus {
+  color: #e74100
+}
+
+a:focus {
+  outline: none
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 20px;
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+}
+
+.header__link {
+
+}
+
+.header__link:hover .header__img, .header__link:focus .header__img {
+  fill: var(--color-success);
+}
+
+.header__img {
+  fill: var(--color-primary);
+  transition: fill ease-in-out 300ms;
+}
+
+.header__img_back {
+  width: 24px;
+}
+
+.header__img_reload {
+  width: 20px;
+}
+
+.title {
+  font-size: 1.5rem;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 30%);
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game {
+  display: grid;
+  grid-gap: 10px;
+  height: calc(100vh - 120px);
+  width: calc(100vw);
+  max-width: 150vh;
+}
+
+.num-16 {
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, calc(25% - 10px));
+}
+
+.num-24 .game__card {
+  padding: 2vh 2vw;
+}
+
+.game__card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--color-background-card);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 30%);
+}
+
+.game__img {
+  max-width: 80%;
+  max-height: 80%;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+}
+
+.footer__copyright {
+  text-align: center;
+}
+
+@media screen and (orientation: portrait) {
+  .num-24{
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(6, calc(16.66% - 10px));
+  }
+}
+
+@media screen and (orientation: landscape) {
+  .num-24 {
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(4, calc(25% - 10px));
+  }
+}
