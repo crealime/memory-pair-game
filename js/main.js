@@ -93,8 +93,8 @@ function setTimeInLocaleStorage() {
     resultMessage = resultMessageTemplate(false)
   }
   else if (bestTime && GAME_TIME.getDiffTime().replace(/\D/g, '') < bestTime.replace(/\D/g, '')) {
-    resultMessage = resultMessageTemplate(false)
     localStorage.setItem(`pairs-${numOfPairs}`, GAME_TIME.getDiffTime())
+    resultMessage = resultMessageTemplate(false)
   }
   else {
     resultMessage = resultMessageTemplate(bestTime)
