@@ -8,6 +8,7 @@
 :root {
   --color-background: #1A2F3D;
   --color-background-card: #283C4D;
+  --color-background-card-hover: #233544;
   --color-primary: #72B4BA;
   --color-warning: #AC6E8B;
   --color-success: #8FB16A;
@@ -22,6 +23,7 @@ body {
   font-family: "Montez", sans-serif;
   background: var(--color-background);
   color: var(--color-primary);
+  user-select: none;
 }
 
 * {
@@ -39,6 +41,11 @@ a:hover, a:focus {
 
 a:focus {
   outline: none
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
 }
 
 .wrapper {
@@ -97,6 +104,7 @@ a:focus {
   height: calc(100vh - 120px);
   width: calc(100vw);
   max-width: 150vh;
+  perspective: 2000px;
 }
 
 .num-16 {
@@ -104,17 +112,78 @@ a:focus {
   grid-template-rows: repeat(4, calc(25% - 10px));
 }
 
+.num-36 {
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(6, calc(16.66% - 10px));
+}
+
+.game__card {
+  padding: 2vh 2vw;
+}
+
+.num-12 .game__card {
+  padding: 4vh 4vw;
+}
+
+.num-16 .game__card {
+  padding: 2vh 2vw;
+}
+
 .num-24 .game__card {
   padding: 2vh 2vw;
 }
 
+.num-30 .game__card {
+  padding: 1.5vh 1.5vw;
+}
+
+.num-36 .game__card {
+  padding: 1.5vh 1vw;
+}
+
+.num-42 .game__card {
+  padding: 1vh 1vw;
+}
+
+.num-56 .game__card {
+  padding: 1vh 1vw;
+}
+
 .game__card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background: var(--color-background-card);
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 30%);
+  transition: all 500ms, background 300ms;
+  transform-style: preserve-3d;
+  position: relative;
+  cursor: pointer;
+}
+
+.game__card:hover {
+  background: var(--color-background-card-hover);
+}
+
+.game__card.flip {
+  transform: rotateY(180deg);
+}
+
+.game__back {
+  position: absolute;
+  top: 2vh;
+  right: 2vw;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+}
+
+.game__front {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  backface-visibility: hidden;
+  transform: rotateY(0deg);
 }
 
 .game__img {
@@ -134,15 +203,65 @@ a:focus {
 }
 
 @media screen and (orientation: portrait) {
-  .num-24{
+  .num-12 {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, calc(25% - 10px));
+  }
+
+  .num-20 {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, calc(20% - 10px));
+  }
+
+  .num-24 {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(6, calc(16.66% - 10px));
+  }
+
+  .num-30{
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(6, calc(16.66% - 10px));
+  }
+
+  .num-42{
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(7, calc(14.28% - 10px));
+  }
+
+  .num-56{
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(8, calc(12.5% - 10px));
   }
 }
 
 @media screen and (orientation: landscape) {
+  .num-12 {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, calc(33.33% - 10px));
+  }
+
+  .num-20 {
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(4, calc(25% - 10px));
+  }
+
   .num-24 {
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(4, calc(25% - 10px));
+  }
+
+  .num-30{
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(5, calc(20% - 10px));
+  }
+
+  .num-42{
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, calc(16.66% - 10px));
+  }
+
+  .num-56{
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(7, calc(14.28% - 10px));
   }
 }
