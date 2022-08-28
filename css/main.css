@@ -58,7 +58,7 @@ a:focus {
 
 .header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   height: 70px;
 }
@@ -96,6 +96,43 @@ a:focus {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.start-page {
+
+}
+
+.start-page__title, .result-page__message {
+  font-size: 3.8rem;
+  text-align: center;
+  line-height: 1.2;
+  margin-bottom: 4rem;
+}
+
+.start-page__ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.start-page__li {
+  list-style: none;
+}
+
+.start-page__link, .result-page__link {
+  display: block;
+  padding: 1.5rem 2rem;
+  background: var(--color-background-card);
+  margin: 1vh 1vh;
+  font-size: 2rem;
+  color: var(--color-primary);
+  border-radius: 10px;
+  transition: 300ms;
+}
+
+.start-page__link:hover, .start-page__link:focus, .result-page__link:hover, .result-page__link:focus {
+  color: var(--color-primary);
+  background: var(--color-background-card-hover);
 }
 
 .game {
@@ -191,6 +228,10 @@ a:focus {
   max-height: 80%;
 }
 
+.result-page {
+  text-align: center;
+}
+
 .footer {
   display: flex;
   justify-content: center;
@@ -231,6 +272,12 @@ a:focus {
   .num-56{
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(8, calc(12.5% - 10px));
+  }
+}
+
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 14px;
   }
 }
 
