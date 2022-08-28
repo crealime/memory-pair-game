@@ -249,10 +249,15 @@ a:focus {
 
 .game__back {
   position: absolute;
-  top: 2vh;
-  right: 2vw;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
   backface-visibility: hidden;
   transform: rotateY(180deg);
+  background: url("../img/background.svg");
+  background-size: 150%;
+  border-radius: 10px;
 }
 
 .game__front {

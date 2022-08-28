@@ -30,7 +30,6 @@ const GAME_TIME = {
 }
 let numOfPairs = 0
 let pairCounter = 0
-let isCardsPreview = false
 
 const main = document.querySelector('.main')
 
@@ -80,7 +79,7 @@ function resultTemplate(time, pairs) {
   `
 }
 
-function preFlipCards() {
+function previewCards() {
   const cards = document.querySelectorAll('.game__card')
 
   cards.forEach((card, i) => setTimeout(() => {
@@ -163,7 +162,7 @@ function renderCards(data, num, preview) {
 
   main.appendChild(game)
 
-  if (preview) preFlipCards()
+  if (preview) previewCards()
 }
 
 function initStartPage() {
