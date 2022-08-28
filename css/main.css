@@ -32,7 +32,7 @@ body {
 
 a {
   text-decoration: none;
-  webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 a:focus {
@@ -155,7 +155,7 @@ a:focus {
 
 .start-page__label {
   cursor: pointer;
-  webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .start-page__checkbox {
