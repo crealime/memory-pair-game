@@ -1,5 +1,9 @@
 const URL = 'json/images.json' // Json file with images urls
 const pair = []
+const TIMER = {
+  time: 600,
+  step: 50
+}
 const GAME_TIME = {
   start: '',
   end: '',
@@ -26,6 +30,7 @@ const GAME_TIME = {
 }
 let numOfPairs = 0
 let pairCounter = 0
+let isCardsPreview = false
 
 const main = document.querySelector('.main')
 
@@ -33,7 +38,7 @@ function startPageTemplate() {
   return `
     <div class="start-page">
       <div class="start-page__title">Select number of&nbsp;pairs</div>
-      <div class="start-page__select-box">
+      <div class="start-page__box">
         <nav class="start-page__nav">
           <ul class="start-page__ul">
             <li class="start-page__li"><a href="#" data-pair="6" class="start-page__link">6</a></li>
@@ -47,6 +52,10 @@ function startPageTemplate() {
           </ul>
         </nav>
       </div>
+      <label class="start-page__label">
+        <input type="checkbox" class="start-page__checkbox">
+        <span class="start-page__preview">Preview</span>
+      </label>
     </div>
   `
 }
@@ -69,6 +78,19 @@ function resultTemplate(time, pairs) {
       <a href="#" class="result-page__link">Play again</a>
     </div>
   `
+}
+
+function preFlipCards() {
+  const cards = document.querySelectorAll('.game__card')
+
+  cards.forEach((card, i) => setTimeout(() => {
+    card.classList.toggle('flip')
+    card.classList.toggle('pointer')
+  }, i * TIMER.step))
+  cards.forEach((card, i) => setTimeout(() => {
+    card.classList.toggle('flip')
+    card.classList.toggle('pointer')
+  }, TIMER.time * numOfPairs + i * TIMER.step))
 }
 
 function flipCard(e) {
@@ -98,9 +120,9 @@ function flipCard(e) {
         if (pairCounter === 0) {
           GAME_TIME.setEndTime()
           GAME_TIME.setDiffTime()
-          setTimeout(() => initResultPage(), 650)
+          setTimeout(() => initResultPage(), TIMER.time)
         }
-      }, 600)
+      }, TIMER.time)
     }
     else if (pair.length === 1 && pair[0] !== id) {
       card.classList.toggle('flip')
@@ -117,7 +139,7 @@ function flipCard(e) {
   }
 }
 
-function renderCards(data, num = 6) {
+function renderCards(data, num, preview) {
   main.innerHTML =''
 
   const game = document.createElement('div')
@@ -140,6 +162,8 @@ function renderCards(data, num = 6) {
   game.addEventListener('click', flipCard)
 
   main.appendChild(game)
+
+  if (preview) preFlipCards()
 }
 
 function initStartPage() {
@@ -151,11 +175,15 @@ function initStartPage() {
 
   startPageUl.addEventListener('click', function(e) {
     e.preventDefault()
-    initGame(e.target.dataset.pair)
+
+    const isPreview = document.querySelector('.start-page__checkbox').checked
+
+    const numberOfPairs = e.target.dataset.pair
+    initGame(numberOfPairs, isPreview)
   })
 }
 
-function initGame(num) {
+function initGame(num, preview) {
 
   // Get data from json
   async function getImagesData(url) {
@@ -164,10 +192,10 @@ function initGame(num) {
 
   getImagesData(URL)
     .then(data => {
-      renderCards(data, num)
       GAME_TIME.setStartTime()
       pairCounter = num
       numOfPairs = num
+      renderCards(data, num, preview)
     })
     .catch(error => console.log(error))
 }

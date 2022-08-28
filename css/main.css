@@ -48,6 +48,10 @@ a:focus {
   opacity: 0;
 }
 
+.pointer {
+  pointer-events: none;
+}
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -99,14 +103,17 @@ a:focus {
 }
 
 .start-page {
-
+  text-align: center;
 }
 
 .start-page__title, .result-page__message {
   font-size: 3.8rem;
-  text-align: center;
   line-height: 1.2;
-  margin-bottom: 4rem;
+  margin-bottom: 2.5rem;
+}
+
+.start-page__box {
+  margin-bottom: 2.5rem;
 }
 
 .start-page__ul {
@@ -132,6 +139,42 @@ a:focus {
 
 .start-page__link:hover, .start-page__link:focus, .result-page__link:hover, .result-page__link:focus {
   color: var(--color-primary);
+  background: var(--color-background-card-hover);
+}
+
+.start-page__label {
+  cursor: pointer;
+}
+
+.start-page__checkbox {
+  position: absolute;
+  appearance: none;
+}
+
+.start-page__checkbox:checked ~ .start-page__preview:after {
+  content: 'V';
+}
+
+.start-page__preview {
+  font-size: 2rem;
+  position: relative;
+  margin-right: 40px;
+}
+
+.start-page__preview:after {
+  content: '';
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  top: 3px;
+  right: -50px;
+  background: var(--color-background-card);
+  border-radius: 10px;
+  font-size: 1.5rem;
+  transition: 300ms;
+}
+
+.start-page__preview:hover:after {
   background: var(--color-background-card-hover);
 }
 
