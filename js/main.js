@@ -57,7 +57,7 @@ function cardTemplate([url, id]) {
       <div class="game__front">
         <img src="${url}" alt="" class="game__img">
       </div>
-      <div class="game__back">${id}</div>
+      <div class="game__back"></div>
     </div>
   `
 }
