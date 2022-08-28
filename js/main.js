@@ -30,7 +30,7 @@ const GAME_TIME = {
 }
 let numOfPairs = 0
 let pairCounter = 0
-
+let resultMessage = ''
 const main = document.querySelector('.main')
 
 function startPageTemplate() {
@@ -74,9 +74,31 @@ function resultTemplate(time, pairs) {
   return `
     <div class="result-page">
       <div class="result-page__message">Your result is<br>${time}<br>for ${pairs} pairs</div>
+       ${resultMessage}
       <a href="#" class="result-page__link">Play again</a>
     </div>
   `
+}
+
+function resultMessageTemplate(isBest) {
+  return !isBest
+    ? `<div class="result-page__message_success">It’s your own record</div>`
+    : `<div class="result-page__message_warning">Your record is ${isBest}</div>`
+}
+
+function setTimeInLocaleStorage() {
+  const bestTime = localStorage.getItem(`pairs-${numOfPairs}`) || null;
+  if (!bestTime) {
+    localStorage.setItem(`pairs-${numOfPairs}`, GAME_TIME.getDiffTime())
+    resultMessage = resultMessageTemplate(false)
+  }
+  else if (bestTime && GAME_TIME.getDiffTime().replace(/\D/g, '') < bestTime.replace(/\D/g, '')) {
+    resultMessage = resultMessageTemplate(false)
+    localStorage.setItem(`pairs-${numOfPairs}`, GAME_TIME.getDiffTime())
+  }
+  else {
+    resultMessage = resultMessageTemplate(bestTime)
+  }
 }
 
 function previewCards() {
@@ -119,6 +141,7 @@ function flipCard(e) {
         if (pairCounter === 0) {
           GAME_TIME.setEndTime()
           GAME_TIME.setDiffTime()
+          setTimeInLocaleStorage()
           setTimeout(() => initResultPage(), TIMER.time)
         }
       }, TIMER.time)

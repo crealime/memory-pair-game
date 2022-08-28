@@ -112,6 +112,21 @@ a:focus {
   margin-bottom: 2.5rem;
 }
 
+.result-page__message {
+  margin-bottom: 2.5rem;
+}
+
+.result-page__message_warning, .result-page__message_success {
+  font-size: 2rem;
+  line-height: 1.2;
+  margin-bottom: 3rem;
+  color: var(--color-warning);
+}
+
+.result-page__message_success {
+  color: var(--color-success);
+}
+
 .start-page__box {
   margin-bottom: 2.5rem;
 }
