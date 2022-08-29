@@ -101,17 +101,33 @@ function setTimeInLocaleStorage() {
   }
 }
 
+function fadeOutFadeIn(foo, num, preview) {
+  const animation = main.animate([
+    {opacity: 1},
+    {opacity: 0}
+  ], {duration: TIMER.time})
+  animation.addEventListener('finish', function() {
+    foo(num, preview)
+    main.animate([
+      {opacity: 0},
+      {opacity: 1}
+    ], {duration: TIMER.time})
+  })
+}
+
 function previewCards() {
   const cards = document.querySelectorAll('.game__card')
 
-  cards.forEach((card, i) => setTimeout(() => {
-    card.classList.toggle('flip')
-    card.classList.toggle('pointer')
-  }, i * TIMER.step))
-  cards.forEach((card, i) => setTimeout(() => {
-    card.classList.toggle('flip')
-    card.classList.toggle('pointer')
-  }, TIMER.time * numOfPairs + i * TIMER.step))
+  setTimeout(() => {
+    cards.forEach((card, i) => setTimeout(() => {
+      card.classList.toggle('flip')
+      card.classList.toggle('pointer')
+    }, i * TIMER.step))
+    cards.forEach((card, i) => setTimeout(() => {
+      card.classList.toggle('flip')
+      card.classList.toggle('pointer')
+    }, TIMER.time * numOfPairs + i * TIMER.step))
+  }, TIMER.time)
 }
 
 function flipCard(e) {
@@ -142,7 +158,8 @@ function flipCard(e) {
           GAME_TIME.setEndTime()
           GAME_TIME.setDiffTime()
           setTimeInLocaleStorage()
-          setTimeout(() => initResultPage(), TIMER.time)
+          fadeOutFadeIn(initResultPage)
+          // setTimeout(() => initResultPage(), TIMER.time)
         }
       }, TIMER.time)
     }
@@ -201,7 +218,8 @@ function initStartPage() {
     const isPreview = document.querySelector('.start-page__checkbox').checked
 
     const numberOfPairs = e.target.dataset.pair
-    initGame(numberOfPairs, isPreview)
+
+    fadeOutFadeIn(initGame, numberOfPairs, isPreview)
   })
 }
 
@@ -231,7 +249,7 @@ function initResultPage() {
 
   resultPageLink.addEventListener('click', function(e) {
     e.preventDefault()
-    initStartPage()
+    fadeOutFadeIn(initStartPage)
   })
 
 }
