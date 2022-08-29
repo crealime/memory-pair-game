@@ -230,8 +230,8 @@ function initStartPage() {
 
   startPageUl.addEventListener('click', function(e) {
     e.preventDefault()
-    const link = e.target.closest('.start-page__link') || null
 
+    const link = e.target.closest('.start-page__link') || null
     const isPreview = document.querySelector('.start-page__checkbox').checked
 
     if (link) {
