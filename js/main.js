@@ -259,8 +259,7 @@ function initResultPage() {
 
 function switchFromResultPage (e) {
   e.preventDefault()
-  e.target.removeEventListener('click', switchFromResultPage)
-
+  e.currentTarget.removeEventListener('click', switchFromResultPage)
   fadeOutFadeIn(initStartPage)
 }
 
